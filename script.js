@@ -1,27 +1,46 @@
+let clientes = [];
+let quantidade = 0;
+
 document.getElementById('adicionar-cliente').addEventListener('click', function() {
-    document.getElementById('pop-up').classList.remove('hidden');
+    document.getElementById('pop-up-adicionar').classList.remove('hidden');
 });
 
-document.getElementById('cancelar').addEventListener('click', function() {
-    document.getElementById('pop-up').classList.add('hidden');
+document.getElementById('cancelar-adicao').addEventListener('click', function() {
+    document.getElementById('pop-up-adicionar').classList.add('hidden');
+    resetPopUpAdicionar();
+});
+
+document.getElementById('adicionar-unidade').addEventListener('click', function() {
+    quantidade++;
+    document.getElementById('quantidade').textContent = quantidade;
+    document.getElementById('total').textContent = (quantidade * 3) + '€';
 });
 
 document.getElementById('confirmar-adicao').addEventListener('click', function() {
     const nome = document.getElementById('nome-cliente').value || 'Cliente Anônimo';
+    const total = quantidade * 3;
     const clienteContainer = document.getElementById('clientes-container');
 
-    if (clienteContainer.children.length < 16) {
+    if (total > 0) {
         const clienteDiv = document.createElement('div');
         clienteDiv.className = 'cliente';
-        clienteDiv.textContent = `${nome} - Bifana Simples - 3€`;
+        clienteDiv.textContent = `${nome} - ${total}€`;
         clienteContainer.appendChild(clienteDiv);
+        clientes.push(`${nome} - ${total}€`);
     } else {
-        alert('Limite de 16 clientes atingido.');
+        alert('Adicione pelo menos uma Bifana.');
     }
 
-    document.getElementById('pop-up').classList.add('hidden');
-    document.getElementById('nome-cliente').value = '';
+    document.getElementById('pop-up-adicionar').classList.add('hidden');
+    resetPopUpAdicionar();
 });
+
+function resetPopUpAdicionar() {
+    quantidade = 0;
+    document.getElementById('nome-cliente').value = '';
+    document.getElementById('quantidade').textContent = '0';
+    document.getElementById('total').textContent = '0€';
+}
 
 document.getElementById('remover-cliente').addEventListener('click', function() {
     const clienteContainer = document.getElementById('clientes-container');
@@ -36,11 +55,15 @@ document.getElementById('remover-cliente').addEventListener('click', function() 
         select.appendChild(option);
     });
 
-    document.getElementById('remover-pop-up').classList.remove('hidden');
+    if (select.options.length > 0) {
+        document.getElementById('pop-up-remover').classList.remove('hidden');
+    } else {
+        alert('Não há clientes para remover.');
+    }
 });
 
 document.getElementById('cancelar-remocao').addEventListener('click', function() {
-    document.getElementById('remover-pop-up').classList.add('hidden');
+    document.getElementById('pop-up-remover').classList.add('hidden');
 });
 
 document.getElementById('confirmar-remocao').addEventListener('click', function() {
@@ -49,5 +72,7 @@ document.getElementById('confirmar-remocao').addEventListener('click', function(
     const index = select.value;
 
     clienteContainer.removeChild(clienteContainer.children[index]);
-    document.getElementById('remover-pop-up').classList.add('hidden');
+    clientes.splice(index, 1);
+
+    document.getElementById('pop-up-remover').classList.add('hidden');
 });
