@@ -1,35 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roulote - Gestão de Clientes</title>
+    <title>Calculadora de Roulote</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="controls">
-        <button id="adicionar-cliente">Adicionar Cliente</button>
-        <button id="remover-cliente">Remover Cliente</button>
-    </div>
-
-    <div id="form-container" class="hidden">
-        <h2>Adicionar Cliente</h2>
-        <label for="nome-cliente">Nome do Cliente (Opcional):</label>
-        <input type="text" id="nome-cliente" placeholder="Nome">
-        <div class="calculadora">
-            <p>Produto: Bifana Simples - 3€</p>
-            <button id="adicionar-unidade">Adicionar Bifana</button>
-            <p>Quantidade: <span id="quantidade">0</span></p>
-            <p>Total: <span id="total">0€</span></p>
+    <div class="container">
+        <div class="left-panel">
+            <h2>Calculadora</h2>
+            <div class="calculator">
+                <div>
+                    <label for="product">Produto:</label>
+                    <select id="product">
+                        <option value="3">Simples - 3€</option>
+                        <option value="3.25">Queijo - 3,25€</option>
+                        <option value="3.50">Q/Bacon - 3,50€</option>
+                        <option value="4">Especial - 4€</option>
+                        <option value="2">Veg - 2€</option>
+                        <option value="1">Água - 1€</option>
+                        <option value="1">Mini - 1€</option>
+                        <option value="1.25">Latas - 1,25€</option>
+                        <option value="0.50">Café - 0,50€</option>
+                    </select>
+                </div>
+                <button id="add-product">Adicionar Produto</button>
+                <div id="product-list"></div>
+                <div>
+                    <label for="client-name">Nome do Cliente:</label>
+                    <input type="text" id="client-name">
+                </div>
+                <button id="add-client">Adicionar Cliente</button>
+            </div>
         </div>
-        <button id="confirmar-adicao">Adicionar Cliente</button>
-        <button id="cancelar-adicao">Cancelar</button>
+        <div class="right-panel">
+            <h2>Clientes</h2>
+            <div id="client-list"></div>
+        </div>
     </div>
-
-    <div id="clientes-container">
-        <!-- Aqui serão adicionados os clientes -->
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
