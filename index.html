@@ -7,26 +7,30 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="clientes-container">
-        <!-- Aqui serão adicionados os clientes -->
-    </div>
-
     <div id="controls">
         <button id="adicionar-cliente">+</button>
         <button id="remover-cliente">-</button>
     </div>
 
-    <div id="pop-up" class="hidden">
+    <div id="clientes-container">
+        <!-- Aqui serão adicionados os clientes -->
+    </div>
+
+    <div id="pop-up-adicionar" class="hidden">
         <h2>Adicionar Cliente</h2>
         <label for="nome-cliente">Nome do Cliente (Opcional):</label>
         <input type="text" id="nome-cliente" placeholder="Nome">
-        <p>Produto: Bifana Simples</p>
-        <p>Preço: 3€</p>
-        <button id="confirmar-adicao">Adicionar</button>
-        <button id="cancelar">Cancelar</button>
+        <div class="calculadora">
+            <p>Produto: Bifana Simples - 3€</p>
+            <button id="adicionar-unidade">Adicionar Bifana</button>
+            <p>Quantidade: <span id="quantidade">0</span></p>
+            <p>Total: <span id="total">0€</span></p>
+        </div>
+        <button id="confirmar-adicao">Adicionar Cliente</button>
+        <button id="cancelar-adicao">Cancelar</button>
     </div>
 
-    <div id="remover-pop-up" class="hidden">
+    <div id="pop-up-remover" class="hidden">
         <h2>Remover Cliente</h2>
         <select id="select-cliente">
             <!-- Clientes serão carregados aqui -->
