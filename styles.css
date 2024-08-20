@@ -24,3 +24,13 @@ button {
     width: 100%;
     box-sizing: border-box;
 }
+
+#currentOrder {
+    margin-top: 20px;
+}
+
+.client {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
