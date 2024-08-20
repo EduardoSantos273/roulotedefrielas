@@ -2,32 +2,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const productGrid = document.querySelector('.product-grid');
     const addClientButton = document.getElementById('add-client');
     const clientList = document.getElementById('client-list');
-    const clientNameInput = document.getElementById('client-name');
-    let products = [];
+    let currentClient = {
+        name: '',
+        products: []
+    };
 
     productGrid.addEventListener('click', (event) => {
         const productElement = event.target.closest('.product');
         if (productElement) {
             const productValue = parseFloat(productElement.getAttribute('data-value'));
-            products.push(productValue);
-            updateProductList();
+            currentClient.products.push(productValue);
+            updateClientList();
         }
     });
 
     addClientButton.addEventListener('click', () => {
-        const clientName = clientNameInput.value.trim();
-        if (clientName && products.length > 0) {
-            const total = products.reduce((acc, curr) => acc + curr, 0).toFixed(2);
+        const clientName = prompt('Nome do Cliente (opcional):').trim();
+        if (clientName || currentClient.products.length > 0) {
+            currentClient.name = clientName;
+            const total = currentClient.products.reduce((acc, curr) => acc + curr, 0).toFixed(2);
             const clientDiv = document.createElement('div');
             clientDiv.classList.add('client-box');
             clientDiv.innerHTML = `
-                <span>${clientName} - ${total}€</span>
+                <span><strong>Cliente:</strong> ${currentClient.name || 'Anônimo'}<br><strong>Total:</strong> ${total}€</span>
+                <ul>
+                    ${currentClient.products.map(product => `<li>${product}€</li>`).join('')}
+                </ul>
                 <button class="delete-client">Excluir</button>
             `;
             clientList.appendChild(clientDiv);
-            clientNameInput.value = '';
-            products = [];
-            updateProductList();
+            currentClient = { name: '', products: [] };
         }
     });
 
@@ -37,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function updateProductList() {
-        productList.innerHTML = products.map(product => `<div>${product}€</div>`).join('');
+    function updateClientList() {
+        // Função auxiliar para atualizar a lista de produtos, se necessário.
     }
 });
