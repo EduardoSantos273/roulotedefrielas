@@ -26,8 +26,32 @@ body {
     margin-bottom: 20px;
 }
 
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.product {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product:hover {
+    background-color: #e0e0e0;
+}
+
 button {
     margin-top: 10px;
+}
+
+#product-list {
+    margin-top: 20px;
 }
 
 .client-box {
