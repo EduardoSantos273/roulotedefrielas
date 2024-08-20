@@ -1,47 +1,24 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const productGrid = document.querySelector('.product-grid');
-    const addClientButton = document.getElementById('add-client');
-    const clientList = document.getElementById('client-list');
-    let currentClient = {
-        name: '',
-        products: []
-    };
+// Selecionar os elementos do DOM
+const calculadora = document.querySelector('.calculadora');
+const clientes = document.querySelector('.clientes');
 
-    productGrid.addEventListener('click', (event) => {
-        const productElement = event.target.closest('.product');
-        if (productElement) {
-            const productValue = parseFloat(productElement.getAttribute('data-value'));
-            currentClient.products.push(productValue);
-            updateClientList();
-        }
+// Criar os botões dos produtos dinamicamente (exemplo)
+function criarBotaoProduto(nome, valor) {
+    const botao = document.createElement('button');
+    botao.textContent = `${nome} - ${valor}€`;
+    // Adicionar um event listener para cada botão
+    botao.addEventListener('click', () => {
+        // Lógica para adicionar o produto ao pedido
     });
+    calculadora.appendChild(botao);
+}
 
-    addClientButton.addEventListener('click', () => {
-        const clientName = prompt('Nome do Cliente (opcional):').trim();
-        if (clientName || currentClient.products.length > 0) {
-            currentClient.name = clientName;
-            const total = currentClient.products.reduce((acc, curr) => acc + curr, 0).toFixed(2);
-            const clientDiv = document.createElement('div');
-            clientDiv.classList.add('client-box');
-            clientDiv.innerHTML = `
-                <span><strong>Cliente:</strong> ${currentClient.name || 'Anônimo'}<br><strong>Total:</strong> ${total}€</span>
-                <ul>
-                    ${currentClient.products.map(product => `<li>${product}€</li>`).join('')}
-                </ul>
-                <button class="delete-client">Excluir</button>
-            `;
-            clientList.appendChild(clientDiv);
-            currentClient = { name: '', products: [] };
-        }
-    });
+// Chamar a função para criar os botões
+criarBotaoProduto('Simples', 3);
+criarBotaoProduto('Queijo', 3.25);
+// ... e assim por diante
 
-    clientList.addEventListener('click', (event) => {
-        if (event.target.classList.contains('delete-client')) {
-            event.target.parentElement.remove();
-        }
-    });
-
-    function updateClientList() {
-        // Função auxiliar para atualizar a lista de produtos, se necessário.
-    }
-});
+// Função para adicionar um cliente
+function adicionarCliente(pedido, valorTotal) {
+    // Criar um elemento para o cliente e adicionar à lista
+}
