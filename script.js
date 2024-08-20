@@ -1,5 +1,6 @@
 let clients = [];
 let currentProducts = [];
+let editingClientId = null;
 
 function addProduct(name, price) {
     currentProducts.push({ name, price });
@@ -28,9 +29,23 @@ function addClient() {
         products: [...currentProducts],
         total: currentProducts.reduce((sum, product) => sum + product.price, 0)
     };
-    clients.push(client);
+    if (editingClientId !== null) {
+        const index = clients.findIndex(client => client.id === editingClientId);
+        clients[index] = client;
+        editingClientId = null;
+    } else {
+        clients.push(client);
+    }
     currentProducts = [];
     renderClients();
+    renderCurrentOrder();
+}
+
+function editClient(id) {
+    const client = clients.find(client => client.id === id);
+    currentProducts = [...client.products];
+    document.getElementById('clientName').value = client.name;
+    editingClientId = id;
     renderCurrentOrder();
 }
 
@@ -51,6 +66,7 @@ function renderClients() {
                 ${client.products.map(product => `<li>${product.name} - ${product.price}€</li>`).join('')}
             </ul>
             <p>Total: ${client.total.toFixed(2)}€</p>
+            <button onclick="editClient(${client.id})">Editar Cliente</button>
             <button onclick="removeClient(${client.id})">Excluir Cliente</button>
         `;
         clientsDiv.appendChild(clientDiv);
