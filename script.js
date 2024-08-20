@@ -1,15 +1,13 @@
-let clientes = [];
 let quantidade = 0;
 
-// Mostrar pop-up para adicionar cliente
+// Mostrar ou esconder o formulário
 document.getElementById('adicionar-cliente').addEventListener('click', function() {
-    document.getElementById('pop-up-adicionar').classList.remove('hidden');
+    document.getElementById('form-container').classList.remove('hidden');
 });
 
-// Fechar pop-up de adicionar cliente
 document.getElementById('cancelar-adicao').addEventListener('click', function() {
-    document.getElementById('pop-up-adicionar').classList.add('hidden');
-    resetPopUpAdicionar();
+    document.getElementById('form-container').classList.add('hidden');
+    resetForm();
 });
 
 // Adicionar uma unidade de Bifana
@@ -30,64 +28,35 @@ document.getElementById('confirmar-adicao').addEventListener('click', function()
         clienteDiv.className = 'cliente';
         clienteDiv.textContent = `${nome} - ${total}€`;
         clienteContainer.appendChild(clienteDiv);
-        clientes.push(`${nome} - ${total}€`);
+        resetForm();
     } else {
         alert('Adicione pelo menos uma Bifana.');
     }
-
-    document.getElementById('pop-up-adicionar').classList.add('hidden');
-    resetPopUpAdicionar();
 });
 
-// Resetar o pop-up de adicionar cliente
-function resetPopUpAdicionar() {
+// Resetar o formulário
+function resetForm() {
     quantidade = 0;
     document.getElementById('nome-cliente').value = '';
     document.getElementById('quantidade').textContent = '0';
     document.getElementById('total').textContent = '0€';
+    document.getElementById('form-container').classList.add('hidden');
 }
 
-// Mostrar pop-up para remover cliente
+// Remover cliente selecionado
 document.getElementById('remover-cliente').addEventListener('click', function() {
     const clienteContainer = document.getElementById('clientes-container');
-    const select = document.getElementById('select-cliente');
+    const clientes = Array.from(clienteContainer.children);
 
-    select.innerHTML = ''; // Limpa o select
+    if (clientes.length > 0) {
+        const clienteIndex = prompt('Digite o número do cliente para remover (começando de 0):');
 
-    Array.from(clienteContainer.children).forEach((cliente, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = cliente.textContent;
-        select.appendChild(option);
-    });
-
-    if (select.options.length > 0) {
-        document.getElementById('pop-up-remover').classList.remove('hidden');
+        if (clienteIndex >= 0 && clienteIndex < clientes.length) {
+            clienteContainer.removeChild(clientes[clienteIndex]);
+        } else {
+            alert('Número do cliente inválido.');
+        }
     } else {
         alert('Não há clientes para remover.');
-    }
-});
-
-// Fechar pop-up de remover cliente
-document.getElementById('cancelar-remocao').addEventListener('click', function() {
-    document.getElementById('pop-up-remover').classList.add('hidden');
-});
-
-// Confirmar e remover cliente selecionado
-document.getElementById('confirmar-remocao').addEventListener('click', function() {
-    const select = document.getElementById('select-cliente');
-    const clienteContainer = document.getElementById('clientes-container');
-    const index = select.value;
-
-    if (index !== undefined) {
-        clienteContainer.removeChild(clienteContainer.children[index]);
-        clientes.splice(index, 1);
-
-        // Atualizar o índice dos clientes restantes
-        Array.from(clienteContainer.children).forEach((cliente, index) => {
-            cliente.textContent = clientes[index];
-        });
-
-        document.getElementById('pop-up-remover').classList.add('hidden');
     }
 });
