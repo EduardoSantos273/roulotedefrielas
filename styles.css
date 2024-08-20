@@ -1,80 +1,9 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
 .container {
     display: flex;
-    height: 100vh;
 }
 
-.left-panel, .right-panel {
-    flex: 1;
+.calculadora, .clientes {
+    width: 50%;
+    border: 1px solid black;
     padding: 20px;
-    box-sizing: border-box;
-}
-
-.left-panel {
-    border-right: 1px solid #ddd;
-}
-
-.right-panel {
-    border-left: 1px solid #ddd;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.product {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-}
-
-.product:hover {
-    background-color: #e0e0e0;
-}
-
-button {
-    margin-top: 10px;
-}
-
-#client-list {
-    margin-top: 20px;
-}
-
-.client-box {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.client-box span {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.client-box button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.client-box ul {
-    padding: 0;
-    list-style-type: none;
-}
-
-.client-box ul li {
-    margin-bottom: 5px;
 }
