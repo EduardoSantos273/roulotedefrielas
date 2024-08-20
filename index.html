@@ -11,28 +11,24 @@
         <div class="left-panel">
             <h2>Calculadora</h2>
             <div class="calculator">
-                <div>
-                    <label for="product">Produto:</label>
-                    <select id="product">
-                        <option value="3">Simples - 3€</option>
-                        <option value="3.25">Queijo - 3,25€</option>
-                        <option value="3.50">Q/Bacon - 3,50€</option>
-                        <option value="4">Especial - 4€</option>
-                        <option value="2">Veg - 2€</option>
-                        <option value="1">Água - 1€</option>
-                        <option value="1">Mini - 1€</option>
-                        <option value="1.25">Latas - 1,25€</option>
-                        <option value="0.50">Café - 0,50€</option>
-                    </select>
+                <div class="product-grid">
+                    <div class="product" data-value="3">Simples<br>3€</div>
+                    <div class="product" data-value="3.25">Queijo<br>3,25€</div>
+                    <div class="product" data-value="3.50">Q/Bacon<br>3,50€</div>
+                    <div class="product" data-value="4">Especial<br>4€</div>
+                    <div class="product" data-value="2">Veg<br>2€</div>
+                    <div class="product" data-value="1">Água<br>1€</div>
+                    <div class="product" data-value="1">Mini<br>1€</div>
+                    <div class="product" data-value="1.25">Latas<br>1,25€</div>
+                    <div class="product" data-value="0.50">Café<br>0,50€</div>
                 </div>
-                <button id="add-product">Adicionar Produto</button>
-                <div id="product-list"></div>
                 <div>
                     <label for="client-name">Nome do Cliente:</label>
                     <input type="text" id="client-name">
                 </div>
                 <button id="add-client">Adicionar Cliente</button>
             </div>
+            <div id="product-list"></div>
         </div>
         <div class="right-panel">
             <h2>Clientes</h2>
