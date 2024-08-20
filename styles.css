@@ -1,9 +1,26 @@
-.container {
-    display: flex;
+body {
+    font-family: Arial, sans-serif;
 }
 
-.calculadora, .clientes {
-    width: 50%;
-    border: 1px solid black;
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left, .right {
+    flex: 1;
     padding: 20px;
+    box-sizing: border-box;
+}
+
+.left {
+    border-right: 1px solid #ccc;
+}
+
+button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
