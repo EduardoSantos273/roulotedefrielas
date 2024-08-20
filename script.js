@@ -1,7 +1,7 @@
 let clientes = [];
 let quantidade = 0;
 
-// Abrir pop-up de adicionar cliente
+// Mostrar pop-up para adicionar cliente
 document.getElementById('adicionar-cliente').addEventListener('click', function() {
     document.getElementById('pop-up-adicionar').classList.remove('hidden');
 });
@@ -47,7 +47,7 @@ function resetPopUpAdicionar() {
     document.getElementById('total').textContent = '0€';
 }
 
-// Abrir pop-up de remover cliente
+// Mostrar pop-up para remover cliente
 document.getElementById('remover-cliente').addEventListener('click', function() {
     const clienteContainer = document.getElementById('clientes-container');
     const select = document.getElementById('select-cliente');
@@ -79,8 +79,15 @@ document.getElementById('confirmar-remocao').addEventListener('click', function(
     const clienteContainer = document.getElementById('clientes-container');
     const index = select.value;
 
-    clienteContainer.removeChild(clienteContainer.children[index]);
-    clientes.splice(index, 1);
+    if (index !== undefined) {
+        clienteContainer.removeChild(clienteContainer.children[index]);
+        clientes.splice(index, 1);
 
-    document.getElementById('pop-up-remover').classList.add('hidden');
+        // Atualizar o índice dos clientes restantes
+        Array.from(clienteContainer.children).forEach((cliente, index) => {
+            cliente.textContent = clientes[index];
+        });
+
+        document.getElementById('pop-up-remover').classList.add('hidden');
+    }
 });
