@@ -8,16 +8,11 @@
 </head>
 <body>
     <div id="controls">
-        <button id="adicionar-cliente">+</button>
-        <button id="remover-cliente">-</button>
+        <button id="adicionar-cliente">Adicionar Cliente</button>
+        <button id="remover-cliente">Remover Cliente</button>
     </div>
 
-    <div id="clientes-container">
-        <!-- Aqui serão adicionados os clientes -->
-    </div>
-
-    <!-- Pop-up para adicionar cliente -->
-    <div id="pop-up-adicionar" class="hidden">
+    <div id="form-container" class="hidden">
         <h2>Adicionar Cliente</h2>
         <label for="nome-cliente">Nome do Cliente (Opcional):</label>
         <input type="text" id="nome-cliente" placeholder="Nome">
@@ -31,14 +26,8 @@
         <button id="cancelar-adicao">Cancelar</button>
     </div>
 
-    <!-- Pop-up para remover cliente -->
-    <div id="pop-up-remover" class="hidden">
-        <h2>Remover Cliente</h2>
-        <select id="select-cliente">
-            <!-- Clientes serão carregados aqui -->
-        </select>
-        <button id="confirmar-remocao">Remover</button>
-        <button id="cancelar-remocao">Cancelar</button>
+    <div id="clientes-container">
+        <!-- Aqui serão adicionados os clientes -->
     </div>
 
     <script src="script.js"></script>
