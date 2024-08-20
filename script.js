@@ -1,62 +1,45 @@
-let quantidade = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const productSelect = document.getElementById('product');
+    const addProductButton = document.getElementById('add-product');
+    const productList = document.getElementById('product-list');
+    const addClientButton = document.getElementById('add-client');
+    const clientList = document.getElementById('client-list');
+    const clientNameInput = document.getElementById('client-name');
 
-// Mostrar ou esconder o formulário
-document.getElementById('adicionar-cliente').addEventListener('click', function() {
-    document.getElementById('form-container').classList.remove('hidden');
-});
+    let products = [];
 
-document.getElementById('cancelar-adicao').addEventListener('click', function() {
-    document.getElementById('form-container').classList.add('hidden');
-    resetForm();
-});
-
-// Adicionar uma unidade de Bifana
-document.getElementById('adicionar-unidade').addEventListener('click', function() {
-    quantidade++;
-    document.getElementById('quantidade').textContent = quantidade;
-    document.getElementById('total').textContent = (quantidade * 3) + '€';
-});
-
-// Confirmar e adicionar cliente à lista
-document.getElementById('confirmar-adicao').addEventListener('click', function() {
-    const nome = document.getElementById('nome-cliente').value || 'Cliente Anônimo';
-    const total = quantidade * 3;
-    const clienteContainer = document.getElementById('clientes-container');
-
-    if (total > 0) {
-        const clienteDiv = document.createElement('div');
-        clienteDiv.className = 'cliente';
-        clienteDiv.textContent = `${nome} - ${total}€`;
-        clienteContainer.appendChild(clienteDiv);
-        resetForm();
-    } else {
-        alert('Adicione pelo menos uma Bifana.');
-    }
-});
-
-// Resetar o formulário
-function resetForm() {
-    quantidade = 0;
-    document.getElementById('nome-cliente').value = '';
-    document.getElementById('quantidade').textContent = '0';
-    document.getElementById('total').textContent = '0€';
-    document.getElementById('form-container').classList.add('hidden');
-}
-
-// Remover cliente selecionado
-document.getElementById('remover-cliente').addEventListener('click', function() {
-    const clienteContainer = document.getElementById('clientes-container');
-    const clientes = Array.from(clienteContainer.children);
-
-    if (clientes.length > 0) {
-        const clienteIndex = prompt('Digite o número do cliente para remover (começando de 0):');
-
-        if (clienteIndex >= 0 && clienteIndex < clientes.length) {
-            clienteContainer.removeChild(clientes[clienteIndex]);
-        } else {
-            alert('Número do cliente inválido.');
+    addProductButton.addEventListener('click', () => {
+        const productValue = parseFloat(productSelect.value);
+        if (productValue) {
+            products.push(productValue);
+            updateProductList();
         }
-    } else {
-        alert('Não há clientes para remover.');
+    });
+
+    addClientButton.addEventListener('click', () => {
+        const clientName = clientNameInput.value.trim();
+        if (clientName && products.length > 0) {
+            const total = products.reduce((acc, curr) => acc + curr, 0).toFixed(2);
+            const clientDiv = document.createElement('div');
+            clientDiv.classList.add('client-box');
+            clientDiv.innerHTML = `
+                <span>${clientName} - ${total}€</span>
+                <button class="delete-client">Excluir</button>
+            `;
+            clientList.appendChild(clientDiv);
+            clientNameInput.value = '';
+            products = [];
+            updateProductList();
+        }
+    });
+
+    clientList.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-client')) {
+            event.target.parentElement.remove();
+        }
+    });
+
+    function updateProductList() {
+        productList.innerHTML = products.map(product => `<div>${product}€</div>`).join('');
     }
 });
