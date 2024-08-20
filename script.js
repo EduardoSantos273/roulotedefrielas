@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const productSelect = document.getElementById('product');
-    const addProductButton = document.getElementById('add-product');
-    const productList = document.getElementById('product-list');
+    const productGrid = document.querySelector('.product-grid');
     const addClientButton = document.getElementById('add-client');
     const clientList = document.getElementById('client-list');
     const clientNameInput = document.getElementById('client-name');
-
     let products = [];
 
-    addProductButton.addEventListener('click', () => {
-        const productValue = parseFloat(productSelect.value);
-        if (productValue) {
+    productGrid.addEventListener('click', (event) => {
+        const productElement = event.target.closest('.product');
+        if (productElement) {
+            const productValue = parseFloat(productElement.getAttribute('data-value'));
             products.push(productValue);
             updateProductList();
         }
