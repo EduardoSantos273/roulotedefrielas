@@ -1,24 +1,41 @@
-// Selecionar os elementos do DOM
-const calculadora = document.querySelector('.calculadora');
-const clientes = document.querySelector('.clientes');
+let clients = [];
+let currentProducts = [];
 
-// Criar os botões dos produtos dinamicamente (exemplo)
-function criarBotaoProduto(nome, valor) {
-    const botao = document.createElement('button');
-    botao.textContent = `${nome} - ${valor}€`;
-    // Adicionar um event listener para cada botão
-    botao.addEventListener('click', () => {
-        // Lógica para adicionar o produto ao pedido
-    });
-    calculadora.appendChild(botao);
+function addProduct(name, price) {
+    currentProducts.push({ name, price });
+    console.log(currentProducts);
 }
 
-// Chamar a função para criar os botões
-criarBotaoProduto('Simples', 3);
-criarBotaoProduto('Queijo', 3.25);
-// ... e assim por diante
+function addClient() {
+    const client = {
+        id: clients.length + 1,
+        products: [...currentProducts],
+        total: currentProducts.reduce((sum, product) => sum + product.price, 0)
+    };
+    clients.push(client);
+    currentProducts = [];
+    renderClients();
+}
 
-// Função para adicionar um cliente
-function adicionarCliente(pedido, valorTotal) {
-    // Criar um elemento para o cliente e adicionar à lista
+function removeClient(id) {
+    clients = clients.filter(client => client.id !== id);
+    renderClients();
+}
+
+function renderClients() {
+    const clientsDiv = document.getElementById('clients');
+    clientsDiv.innerHTML = '';
+    clients.forEach(client => {
+        const clientDiv = document.createElement('div');
+        clientDiv.className = 'client';
+        clientDiv.innerHTML = `
+            <h3>Cliente ${client.id}</h3>
+            <ul>
+                ${client.products.map(product => `<li>${product.name} - ${product.price}€</li>`).join('')}
+            </ul>
+            <p>Total: ${client.total}€</p>
+            <button onclick="removeClient(${client.id})">Excluir Cliente</button>
+        `;
+        clientsDiv.appendChild(clientDiv);
+    });
 }
