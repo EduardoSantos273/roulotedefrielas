@@ -1,51 +1,48 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
     height: 100vh;
 }
 
-#controls {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
+.left-panel, .right-panel {
+    flex: 1;
     padding: 20px;
-    position: fixed;
-    bottom: 0;
-    background: white;
-    border-top: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-#controls button {
-    width: 150px;
-    height: 50px;
-    font-size: 16px;
+.left-panel {
+    border-right: 1px solid #ddd;
 }
 
-#form-container {
-    margin-top: 20px;
-    width: 80%;
-    background: white;
-    padding: 20px;
-    border: 1px solid #ccc;
+.right-panel {
+    border-left: 1px solid #ddd;
 }
 
-.hidden {
-    display: none;
+.calculator {
+    margin-bottom: 20px;
 }
 
-.calculadora {
-    margin: 20px 0;
+button {
+    margin-top: 10px;
 }
 
-.cliente {
-    border: 1px solid #000;
+.client-box {
+    border: 1px solid #ddd;
     padding: 10px;
-    text-align: center;
     margin-bottom: 10px;
-    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.client-box button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
