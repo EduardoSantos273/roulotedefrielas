@@ -9,26 +9,13 @@ body {
     height: 100vh;
 }
 
-#clientes-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    width: 80%;
-    margin-top: 20px;
-    flex-grow: 1;
-}
-
-.cliente {
-    border: 1px solid #000;
-    padding: 10px;
-    text-align: center;
-}
-
 #controls {
     display: flex;
     justify-content: space-around;
     width: 100%;
     padding: 20px;
+    position: absolute;
+    bottom: 0;
 }
 
 #controls button {
@@ -37,7 +24,20 @@ body {
     font-size: 24px;
 }
 
-#pop-up, #remover-pop-up {
+#clientes-container {
+    margin-top: 20px;
+    flex-grow: 1;
+    width: 80%;
+}
+
+.cliente {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#pop-up-adicionar, #pop-up-remover {
     position: absolute;
     top: 50%;
     left: 50%;
