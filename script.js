@@ -108,6 +108,4 @@ function renderClients() {
             <ul>
                 ${client.products.map(product => `<li>${product.name} - ${product.price}€ (${product.quantity})</li>`).join('')}
             </ul>
-            <p>Total: ${client.total.toFixed(2)}€</p>
-            <button onclick="editClient(${client.id})">Editar</button>
-            <
+            <p>Total: ${client.total.toFixed
