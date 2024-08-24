@@ -8,13 +8,25 @@ body {
 }
 
 .left, .right {
-    flex: 1;
     padding: 20px;
     box-sizing: border-box;
 }
 
 .left {
+    flex: 62.5%;
     border-right: 1px solid #ccc;
+}
+
+.right {
+    flex: 37.5%;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 button {
@@ -23,24 +35,40 @@ button {
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 20px;
     border-radius: 8px;
 }
 
 #products button {
-    width: 45%;
+    width: 30%;
     margin: 5px;
     display: inline-block;
+}
+
+#specialButtons button {
+    width: 22%;
+    margin: 5px;
+    display: inline-block;
+    padding: 20px;
+    font-size: 18px;
 }
 
 #currentOrder {
     margin-top: 20px;
 }
 
+#currentOrder h3, #currentOrder p {
+    font-size: 18px;
+}
+
 .client {
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.client h3, .client p {
+    font-size: 18px;
 }
 
 #clients {
