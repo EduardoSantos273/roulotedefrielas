@@ -33,8 +33,10 @@
                 <h3>Pedido Atual</h3>
                 <ul id="orderList"></ul>
                 <p>Total: <span id="orderTotal">0</span>€</p>
-                <button onclick="addClient()">Adicionar Cliente</button>
-                <button onclick="clearOrder()">Limpar Pedido</button>
+                <div class="order-buttons">
+                    <button onclick="addClient()">+</button>
+                    <button onclick="clearOrder()">-</button>
+                </div>
             </div>
             <button onclick="toggleClients()">Mostrar Clientes</button>
             <div id="clients" style="display: none;"></div>
