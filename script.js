@@ -3,6 +3,7 @@ let currentProducts = [];
 let editingClientId = null;
 let clientIdCounter = 1;
 let selectedSpecial = '';
+let actionHistory = [];
 
 function addProduct(name, price) {
     if (selectedSpecial) {
@@ -15,6 +16,7 @@ function addProduct(name, price) {
     } else {
         currentProducts.push({ name, price, quantity: 1 });
     }
+    actionHistory.push({ type: 'addProduct', name, price });
     renderCurrentOrder();
 }
 
@@ -52,6 +54,7 @@ function addClient() {
     } else {
         clients.push(client);
     }
+    actionHistory.push({ type: 'addClient', client });
     currentProducts = [];
     document.getElementById('clientName').value = '';
     renderClients();
@@ -69,11 +72,14 @@ function editClient(id) {
 }
 
 function removeClient(id) {
+    const client = clients.find(client => client.id === id);
+    actionHistory.push({ type: 'removeClient', client });
     clients = clients.filter(client => client.id !== id);
     renderClients();
 }
 
 function clearOrder() {
+    actionHistory.push({ type: 'clearOrder', products: [...currentProducts] });
     currentProducts = [];
     renderCurrentOrder();
 }
@@ -108,5 +114,30 @@ function backToMain() {
 }
 
 function undoAction() {
-    // Implementar a lógica de retroceder a última ação
+    const lastAction = actionHistory.pop();
+    if (!lastAction) return;
+
+    switch (lastAction.type) {
+        case 'addProduct':
+            const productIndex = currentProducts.findIndex(product => product.name === lastAction.name);
+            if (productIndex !== -1) {
+                if (currentProducts[productIndex].quantity > 1) {
+                    currentProducts[productIndex].quantity -= 1;
+                } else {
+                    currentProducts.splice(productIndex, 1);
+                }
+            }
+            break;
+        case 'addClient':
+            clients = clients.filter(client => client.id !== lastAction.client.id);
+            break;
+        case 'removeClient':
+            clients.push(lastAction.client);
+            break;
+        case 'clearOrder':
+            currentProducts = lastAction.products;
+            break;
+    }
+    renderCurrentOrder();
+    renderClients();
 }
