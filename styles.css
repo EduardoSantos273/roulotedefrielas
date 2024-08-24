@@ -65,6 +65,15 @@ button {
     font-size: 18px;
 }
 
+.order-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-buttons button {
+    width: 48%;
+}
+
 .client {
     border: 1px solid #ccc;
     padding: 10px;
