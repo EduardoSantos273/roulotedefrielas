@@ -21,12 +21,25 @@ body {
     flex: 37.5%;
 }
 
-input[type="text"] {
-    width: 100%;
+.client-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.client-input input[type="text"] {
+    width: 50%;
     padding: 15px;
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-right: 10px;
     box-sizing: border-box;
+}
+
+.client-input button {
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 button {
