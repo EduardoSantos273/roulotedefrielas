@@ -9,7 +9,10 @@
 <body>
     <div class="container" id="mainScreen">
         <div class="left">
-            <input type="text" id="clientName" placeholder="Nome do Cliente (opcional)">
+            <div class="client-name-container">
+                <input type="text" id="clientName" placeholder="Nome do Cliente (opcional)">
+                <button id="undoButton" onclick="undoAction()">Retroceder</button>
+            </div>
             <div id="specialButtons">
                 <button onclick="selectSpecial('B')">B</button>
                 <button onclick="selectSpecial('H')">H</button>
