@@ -106,7 +106,4 @@ function showClients() {
 
 function backToMain() {
     document.getElementById('clientsScreen').style.display = 'none';
-    document.getElementById('mainScreen').style.display = 'flex';
-}
-
-function undoAction
+    document.getElementById('mainScreen').style.display = 'flex
