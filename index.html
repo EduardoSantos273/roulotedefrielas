@@ -9,8 +9,13 @@
 <body>
     <div class="container">
         <div class="left">
-            <h2>Calculadora</h2>
             <input type="text" id="clientName" placeholder="Nome do Cliente (opcional)">
+            <div id="specialButtons">
+                <button onclick="selectSpecial('B')">B</button>
+                <button onclick="selectSpecial('H')">H</button>
+                <button onclick="selectSpecial('E')">E</button>
+                <button onclick="selectSpecial('C')">C</button>
+            </div>
             <div id="products">
                 <button onclick="addProduct('Simples', 3)">Simples - 3€</button>
                 <button onclick="addProduct('Queijo', 3.25)">Queijo - 3,25€</button>
@@ -22,17 +27,17 @@
                 <button onclick="addProduct('Latas', 1.25)">Latas - 1,25€</button>
                 <button onclick="addProduct('Café', 0.5)">Café - 0,50€</button>
             </div>
+        </div>
+        <div class="right">
             <div id="currentOrder">
                 <h3>Pedido Atual</h3>
                 <ul id="orderList"></ul>
                 <p>Total: <span id="orderTotal">0</span>€</p>
+                <button onclick="addClient()">Adicionar Cliente</button>
+                <button onclick="clearOrder()">Limpar Pedido</button>
             </div>
-            <button onclick="addClient()">Adicionar Cliente</button>
-            <button onclick="clearOrder()">Limpar Pedido</button>
-        </div>
-        <div class="right">
-            <h2>Clientes</h2>
-            <div id="clients"></div>
+            <button onclick="toggleClients()">Mostrar Clientes</button>
+            <div id="clients" style="display: none;"></div>
         </div>
     </div>
     <script src="script.js"></script>
