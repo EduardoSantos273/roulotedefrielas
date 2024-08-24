@@ -89,3 +89,11 @@ button {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
+
+.back-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
