@@ -37,9 +37,9 @@ function renderCurrentOrder() {
 }
 
 function addClient() {
-    const clientName = document.getElementById('clientName').value || `Cliente ${clientIdCounter}`;
+    const clientName = document.getElementById('clientName').value || `Cliente ${clientIdCounter++}`;
     const client = {
-        id: clientIdCounter++,
+        id: clientIdCounter,
         name: clientName,
         products: [...currentProducts],
         total: currentProducts.reduce((sum, product) => sum + product.price * product.quantity, 0)
@@ -96,7 +96,7 @@ function renderClients() {
 
 function toggleClients() {
     const clientsDiv = document.getElementById('clients');
-    if (clientsDiv.style.display === 'none') {
+    if (clientsDiv.style.display === 'none' || clientsDiv.style.display === '') {
         clientsDiv.style.display = 'block';
     } else {
         clientsDiv.style.display = 'none';
