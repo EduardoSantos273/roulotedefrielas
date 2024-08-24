@@ -48,6 +48,7 @@ function addClient() {
         const index = clients.findIndex(client => client.id === editingClientId);
         clients[index] = client;
         editingClientId = null;
+        document.getElementById('addClientButton').textContent = 'Adicionar';
     } else {
         clients.push(client);
     }
@@ -64,6 +65,7 @@ function editClient(id) {
     editingClientId = id;
     renderCurrentOrder();
     backToMain();
+    document.getElementById('addClientButton').textContent = 'Confirmar';
 }
 
 function removeClient(id) {
