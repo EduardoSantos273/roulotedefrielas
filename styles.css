@@ -21,11 +21,24 @@ body {
     flex: 37.5%;
 }
 
-input[type="text"] {
-    width: 100%;
+.client-name-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.client-name-container input[type="text"] {
+    width: 70%;
     padding: 15px;
     font-size: 18px;
-    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.client-name-container button {
+    width: 30%;
+    padding: 15px;
+    font-size: 18px;
+    margin-left: 10px;
     box-sizing: border-box;
 }
 
