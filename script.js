@@ -63,6 +63,7 @@ function editClient(id) {
     document.getElementById('clientName').value = client.name;
     editingClientId = id;
     renderCurrentOrder();
+    showMainScreen();
 }
 
 function removeClient(id) {
@@ -94,11 +95,12 @@ function renderClients() {
     });
 }
 
-function toggleClients() {
-    const clientsDiv = document.getElementById('clients');
-    if (clientsDiv.style.display === 'none' || clientsDiv.style.display === '') {
-        clientsDiv.style.display = 'block';
-    } else {
-        clientsDiv.style.display = 'none';
-    }
+function showClients() {
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('clientsScreen').style.display = 'flex';
+}
+
+function backToMain() {
+    document.getElementById('clientsScreen').style.display = 'none';
+    document.getElementById('mainScreen').style.display = 'flex';
 }
