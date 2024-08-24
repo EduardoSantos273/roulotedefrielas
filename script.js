@@ -1,9 +1,14 @@
 let clients = [];
 let currentProducts = [];
 let editingClientId = null;
-let clientIdCounter = 1; // Adicionando um contador de identificadores
+let clientIdCounter = 1;
+let selectedSpecial = '';
 
 function addProduct(name, price) {
+    if (selectedSpecial) {
+        name = `${selectedSpecial} ${name}`;
+        selectedSpecial = '';
+    }
     const existingProduct = currentProducts.find(product => product.name === name);
     if (existingProduct) {
         existingProduct.quantity += 1;
@@ -11,6 +16,10 @@ function addProduct(name, price) {
         currentProducts.push({ name, price, quantity: 1 });
     }
     renderCurrentOrder();
+}
+
+function selectSpecial(special) {
+    selectedSpecial = special;
 }
 
 function renderCurrentOrder() {
@@ -30,7 +39,7 @@ function renderCurrentOrder() {
 function addClient() {
     const clientName = document.getElementById('clientName').value || `Cliente ${clientIdCounter}`;
     const client = {
-        id: clientIdCounter++, // Usando o contador de identificadores
+        id: clientIdCounter++,
         name: clientName,
         products: [...currentProducts],
         total: currentProducts.reduce((sum, product) => sum + product.price * product.quantity, 0)
@@ -83,4 +92,13 @@ function renderClients() {
         `;
         clientsDiv.appendChild(clientDiv);
     });
+}
+
+function toggleClients() {
+    const clientsDiv = document.getElementById('clients');
+    if (clientsDiv.style.display === 'none') {
+        clientsDiv.style.display = 'block';
+    } else {
+        clientsDiv.style.display = 'none';
+    }
 }
