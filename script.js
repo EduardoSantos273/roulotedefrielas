@@ -3,6 +3,7 @@ let currentProducts = [];
 let editingClientId = null;
 let clientIdCounter = 1;
 let selectedSpecial = '';
+let actionHistory = [];
 
 function addProduct(name, price) {
     if (selectedSpecial) {
@@ -15,6 +16,7 @@ function addProduct(name, price) {
     } else {
         currentProducts.push({ name, price, quantity: 1 });
     }
+    actionHistory.push({ type: 'addProduct', name, price });
     renderCurrentOrder();
 }
 
@@ -106,3 +108,5 @@ function backToMain() {
     document.getElementById('clientsScreen').style.display = 'none';
     document.getElementById('mainScreen').style.display = 'flex';
 }
+
+function undoAction
