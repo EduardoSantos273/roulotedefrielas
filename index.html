@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="mainScreen">
         <div class="left">
             <input type="text" id="clientName" placeholder="Nome do Cliente (opcional)">
             <div id="specialButtons">
@@ -38,9 +38,12 @@
                     <button onclick="clearOrder()">-</button>
                 </div>
             </div>
-            <button onclick="toggleClients()">Mostrar Clientes</button>
-            <div id="clients" style="display: none;"></div>
+            <button onclick="showClients()">Mostrar Clientes</button>
         </div>
+    </div>
+    <div class="container" id="clientsScreen" style="display: none;">
+        <button onclick="backToMain()">Voltar</button>
+        <div id="clients"></div>
     </div>
     <script src="script.js"></script>
 </body>
