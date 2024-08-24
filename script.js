@@ -3,6 +3,7 @@ let currentProducts = [];
 let editingClientId = null;
 let clientIdCounter = 1;
 let selectedSpecial = '';
+let actionHistory = [];
 
 function addProduct(name, price) {
     if (selectedSpecial) {
@@ -15,6 +16,7 @@ function addProduct(name, price) {
     } else {
         currentProducts.push({ name, price, quantity: 1 });
     }
+    actionHistory.push({ action: 'add', product: { name, price } });
     renderCurrentOrder();
 }
 
@@ -34,6 +36,28 @@ function renderCurrentOrder() {
         total += product.price * product.quantity;
     });
     orderTotal.textContent = total.toFixed(2);
+}
+
+function undoLastAction() {
+    const lastAction = actionHistory.pop();
+    if (lastAction) {
+        if (lastAction.action === 'add') {
+            const productIndex = currentProducts.findIndex(product => product.name === lastAction.product.name);
+            if (productIndex !== -1) {
+                currentProducts[productIndex].quantity -= 1;
+                if (currentProducts[productIndex].quantity === 0) {
+                    currentProducts.splice(productIndex, 1);
+                }
+            }
+        }
+        renderCurrentOrder();
+    }
+}
+
+function clearOrder() {
+    currentProducts = [];
+    actionHistory = [];
+    renderCurrentOrder();
 }
 
 function addClient() {
@@ -73,11 +97,6 @@ function removeClient(id) {
     renderClients();
 }
 
-function clearOrder() {
-    currentProducts = [];
-    renderCurrentOrder();
-}
-
 function renderClients() {
     const clientsDiv = document.getElementById('clients');
     clientsDiv.innerHTML = '';
@@ -91,18 +110,4 @@ function renderClients() {
             </ul>
             <p>Total: ${client.total.toFixed(2)}€</p>
             <button onclick="editClient(${client.id})">Editar</button>
-            <button onclick="removeClient(${client.id})">Excluir</button>
-        `;
-        clientsDiv.appendChild(clientDiv);
-    });
-}
-
-function showClients() {
-    document.getElementById('mainScreen').style.display = 'none';
-    document.getElementById('clientsScreen').style.display = 'flex';
-}
-
-function backToMain() {
-    document.getElementById('clientsScreen').style.display = 'none';
-    document.getElementById('mainScreen').style.display = 'flex';
-}
+            <
