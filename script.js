@@ -63,7 +63,7 @@ function editClient(id) {
     document.getElementById('clientName').value = client.name;
     editingClientId = id;
     renderCurrentOrder();
-    showMainScreen();
+    backToMain();
 }
 
 function removeClient(id) {
@@ -88,8 +88,8 @@ function renderClients() {
                 ${client.products.map(product => `<li>${product.name} - ${product.price}€ (${product.quantity})</li>`).join('')}
             </ul>
             <p>Total: ${client.total.toFixed(2)}€</p>
-            <button onclick="editClient(${client.id})">Editar Cliente</button>
-            <button onclick="removeClient(${client.id})">Excluir Cliente</button>
+            <button onclick="editClient(${client.id})">Editar</button>
+            <button onclick="removeClient(${client.id})">Excluir</button>
         `;
         clientsDiv.appendChild(clientDiv);
     });
