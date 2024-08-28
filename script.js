@@ -18,6 +18,7 @@ function addProduct(name, price) {
     }
     actionHistory.push({ type: 'addProduct', name, price });
     renderCurrentOrder();
+    updateProductButtons();
 }
 
 function selectSpecial(special) {
@@ -31,11 +32,24 @@ function renderCurrentOrder() {
     let total = 0;
     currentProducts.forEach(product => {
         const li = document.createElement('li');
-        li.textContent = `${product.name} - ${product.price}€ (${product.quantity})`;
+        li.textContent = `(${product.quantity}) ${product.name} - ${product.price}€`;
         orderList.appendChild(li);
         total += product.price * product.quantity;
     });
     orderTotal.textContent = total.toFixed(2);
+}
+
+function updateProductButtons() {
+    const productButtons = document.querySelectorAll('#products button');
+    productButtons.forEach(button => {
+        const productName = button.textContent.split(' - ')[0];
+        const product = currentProducts.find(p => p.name === productName);
+        if (product) {
+            button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1]}<span class="quantity">${product.quantity}</span>`;
+        } else {
+            button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1]}`;
+        }
+    });
 }
 
 function addClient() {
@@ -59,6 +73,7 @@ function addClient() {
     document.getElementById('clientName').value = '';
     renderClients();
     renderCurrentOrder();
+    updateProductButtons();
 }
 
 function editClient(id) {
@@ -82,6 +97,7 @@ function clearOrder() {
     actionHistory.push({ type: 'clearOrder', products: [...currentProducts] });
     currentProducts = [];
     renderCurrentOrder();
+    updateProductButtons();
 }
 
 function renderClients() {
@@ -93,7 +109,7 @@ function renderClients() {
         clientDiv.innerHTML = `
             <h3>${client.name}</h3>
             <ul>
-                ${client.products.map(product => `<li>${product.name} - ${product.price}€ (${product.quantity})</li>`).join('')}
+                ${client.products.map(product => `<li>(${product.quantity}) ${product.name} - ${product.price}€</li>`).join('')}
             </ul>
             <p>Total: ${client.total.toFixed(2)}€</p>
             <button onclick="editClient(${client.id})">Editar</button>
