@@ -43,7 +43,7 @@ function updateProductButtons() {
     const productButtons = document.querySelectorAll('#products button');
     productButtons.forEach(button => {
         const productName = button.textContent.split(' - ')[0].trim();
-        const product = currentProducts.find(p => p.name === productName);
+        const product = currentProducts.find(p => p.name === productName || p.name.includes(productName));
         if (product) {
             button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1].split('<')[0]}<span class="quantity">${product.quantity}</span>`;
         } else {
