@@ -119,25 +119,17 @@ function undoAction() {
 
     switch (lastAction.type) {
         case 'addProduct':
-            const productIndex = currentProducts.findIndex(product => product.name === lastAction.name);
-            if (productIndex !== -1) {
-                if (currentProducts[productIndex].quantity > 1) {
-                    currentProducts[productIndex].quantity -= 1;
-                } else {
-                    currentProducts.splice(productIndex, 1);
-                }
-            }
+            // Implementar lógica para desfazer a adição de produto
             break;
         case 'addClient':
-            clients = clients.filter(client => client.id !== lastAction.client.id);
+            // Implementar lógica para desfazer a adição de cliente
             break;
         case 'removeClient':
-            clients.push(lastAction.client);
+            // Implementar lógica para desfazer a remoção de cliente
             break;
         case 'clearOrder':
-            currentProducts = lastAction.products;
+            // Implementar lógica para desfazer a limpeza do pedido
             break;
     }
-    renderCurrentOrder();
-    renderClients();
 }
+
