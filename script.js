@@ -18,6 +18,7 @@ function addProduct(name, price) {
     }
     actionHistory.push({ type: 'addProduct', name, price });
     renderCurrentOrder();
+    updateProductButton(name);
 }
 
 function selectSpecial(special) {
@@ -36,6 +37,15 @@ function renderCurrentOrder() {
         total += product.price * product.quantity;
     });
     orderTotal.textContent = total.toFixed(2);
+}
+
+function updateProductButton(name) {
+    const productButton = document.getElementById(name);
+    const product = currentProducts.find(product => product.name === name);
+    const quantitySpan = document.getElementById(`${name}-quantity`);
+    if (product && quantitySpan) {
+        quantitySpan.textContent = product.quantity;
+    }
 }
 
 function addClient() {
@@ -68,67 +78,4 @@ function editClient(id) {
     editingClientId = id;
     renderCurrentOrder();
     backToMain();
-    document.getElementById('addClientButton').textContent = 'Confirmar';
-}
-
-function removeClient(id) {
-    const client = clients.find(client => client.id === id);
-    actionHistory.push({ type: 'removeClient', client });
-    clients = clients.filter(client => client.id !== id);
-    renderClients();
-}
-
-function clearOrder() {
-    actionHistory.push({ type: 'clearOrder', products: [...currentProducts] });
-    currentProducts = [];
-    renderCurrentOrder();
-}
-
-function renderClients() {
-    const clientsDiv = document.getElementById('clients');
-    clientsDiv.innerHTML = '';
-    clients.forEach(client => {
-        const clientDiv = document.createElement('div');
-        clientDiv.className = 'client';
-        clientDiv.innerHTML = `
-            <h3>${client.name}</h3>
-            <ul>
-                ${client.products.map(product => `<li>${product.name} - ${product.price}€ (${product.quantity})</li>`).join('')}
-            </ul>
-            <p>Total: ${client.total.toFixed(2)}€</p>
-            <button onclick="editClient(${client.id})">Editar</button>
-            <button onclick="removeClient(${client.id})">Excluir</button>
-        `;
-        clientsDiv.appendChild(clientDiv);
-    });
-}
-
-function showClients() {
-    document.getElementById('mainScreen').style.display = 'none';
-    document.getElementById('clientsScreen').style.display = 'flex';
-}
-
-function backToMain() {
-    document.getElementById('clientsScreen').style.display = 'none';
-    document.getElementById('mainScreen').style.display = 'flex';
-}
-
-function undoAction() {
-    const lastAction = actionHistory.pop();
-    if (!lastAction) return;
-
-    switch (lastAction.type) {
-        case 'addProduct':
-            // Implementar lógica para desfazer a adição de produto
-            break;
-        case 'addClient':
-            // Implementar lógica para desfazer a adição de cliente
-            break;
-        case 'removeClient':
-            // Implementar lógica para desfazer a remoção de cliente
-            break;
-        case 'clearOrder':
-            // Implementar lógica para desfazer a limpeza do pedido
-            break;
-    }
-}
+    document.getElementById('addClientButton').text
