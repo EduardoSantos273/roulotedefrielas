@@ -48,7 +48,7 @@ function addClient() {
     };
     if (editingClientId !== null) {
         const index = clients.findIndex(client => client.id === editingClientId);
-        clients[index] = client;
+        clients[index] = { ...client, id: editingClientId }; // Preserve the original ID
         editingClientId = null;
         document.getElementById('addClientButton').textContent = 'Adicionar';
     } else {
@@ -132,4 +132,3 @@ function undoAction() {
             break;
     }
 }
-
