@@ -50,12 +50,21 @@ button {
     box-sizing: border-box;
     font-size: 20px;
     border-radius: 8px;
+    position: relative;
 }
 
 #products button {
     width: 30%;
     margin: 5px;
     display: inline-block;
+}
+
+#products button span.quantity {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.8em;
+    color: red;
 }
 
 #specialButtons {
