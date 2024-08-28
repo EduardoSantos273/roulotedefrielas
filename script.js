@@ -45,9 +45,9 @@ function updateProductButtons() {
         const productName = button.textContent.split(' - ')[0].trim();
         const product = currentProducts.find(p => p.name === productName);
         if (product) {
-            button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1]}<span class="quantity">${product.quantity}</span>`;
+            button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1].split('<')[0]}<span class="quantity">${product.quantity}</span>`;
         } else {
-            button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1]}`;
+            button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1].split('<')[0]}`;
         }
     });
 }
