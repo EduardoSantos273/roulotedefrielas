@@ -42,7 +42,7 @@ function renderCurrentOrder() {
 function updateProductButtons() {
     const productButtons = document.querySelectorAll('#products button');
     productButtons.forEach(button => {
-        const productName = button.textContent.split(' - ')[0];
+        const productName = button.textContent.split(' - ')[0].trim();
         const product = currentProducts.find(p => p.name === productName);
         if (product) {
             button.innerHTML = `${productName} - ${button.textContent.split(' - ')[1]}<span class="quantity">${product.quantity}</span>`;
