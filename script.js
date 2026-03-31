@@ -45,6 +45,7 @@ function addClient() {
         name: clientName,
         products: [...currentProducts],
         total: currentProducts.reduce((sum, product) => sum + product.price * product.quantity, 0)
+        paid: false
     };
     if (editingClientId !== null) {
         const index = clients.findIndex(client => client.id === editingClientId);
@@ -111,6 +112,11 @@ function showClients() {
 function backToMain() {
     document.getElementById('clientsScreen').style.display = 'none';
     document.getElementById('mainScreen').style.display = 'flex';
+}
+function togglePaid(id) {
+    const client = clients.find(c => c.id === id);
+    client.paid = !client.paid;
+    renderClients();
 }
 
 function undoAction() {
