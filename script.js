@@ -39,27 +39,34 @@ function renderCurrentOrder() {
 }
 
 function addClient() {
-    const clientName = document.getElementById('clientName').value || `Cliente ${clientIdCounter++}`;
+    const clientName = document.getElementById('clientName').value || `Cliente ${clientIdCounter}`;
     const client = {
-        id: clientIdCounter,
+        id: clientIdCounter++,
         name: clientName,
         products: [...currentProducts],
-        total: currentProducts.reduce((sum, product) => sum + product.price * product.quantity, 0)
+        total: currentProducts.reduce((sum, product) => sum + product.price * product.quantity, 0),
         paid: false
     };
+
     if (editingClientId !== null) {
-        const index = clients.findIndex(client => client.id === editingClientId);
-        clients[index] = { ...client, id: editingClientId }; // Preserve the original ID
+        const index = clients.findIndex(c => c.id === editingClientId);
+        clients[index] = { ...client, id: editingClientId };
         editingClientId = null;
         document.getElementById('addClientButton').textContent = 'Adicionar';
     } else {
         clients.push(client);
     }
-    actionHistory.push({ type: 'addClient', client });
+
     currentProducts = [];
     document.getElementById('clientName').value = '';
     renderClients();
     renderCurrentOrder();
+}
+
+function togglePaid(id) {
+    const client = clients.find(c => c.id === id);
+    client.paid = !client.paid;
+    renderClients();
 }
 
 function editClient(id) {
@@ -73,14 +80,11 @@ function editClient(id) {
 }
 
 function removeClient(id) {
-    const client = clients.find(client => client.id === id);
-    actionHistory.push({ type: 'removeClient', client });
     clients = clients.filter(client => client.id !== id);
     renderClients();
 }
 
 function clearOrder() {
-    actionHistory.push({ type: 'clearOrder', products: [...currentProducts] });
     currentProducts = [];
     renderCurrentOrder();
 }
@@ -88,10 +92,13 @@ function clearOrder() {
 function renderClients() {
     const clientsDiv = document.getElementById('clients');
     clientsDiv.innerHTML = '';
+
     clients.forEach(client => {
         const clientDiv = document.createElement('div');
         clientDiv.className = 'client';
+
         clientDiv.innerHTML = `
+            <div class="status-dot ${client.paid ? 'paid' : 'unpaid'}"></div>
             <h3>${client.name}</h3>
             <ul>
                 ${client.products.map(product => `<li>${product.name} - ${product.price}€ (${product.quantity})</li>`).join('')}
@@ -100,6 +107,9 @@ function renderClients() {
             <button onclick="editClient(${client.id})">Editar</button>
             <button onclick="removeClient(${client.id})">Excluir</button>
         `;
+
+        clientDiv.onclick = () => togglePaid(client.id);
+
         clientsDiv.appendChild(clientDiv);
     });
 }
@@ -113,28 +123,7 @@ function backToMain() {
     document.getElementById('clientsScreen').style.display = 'none';
     document.getElementById('mainScreen').style.display = 'flex';
 }
-function togglePaid(id) {
-    const client = clients.find(c => c.id === id);
-    client.paid = !client.paid;
-    renderClients();
-}
 
 function undoAction() {
-    const lastAction = actionHistory.pop();
-    if (!lastAction) return;
-
-    switch (lastAction.type) {
-        case 'addProduct':
-            // Implementar lógica para desfazer a adição de produto
-            break;
-        case 'addClient':
-            // Implementar lógica para desfazer a adição de cliente
-            break;
-        case 'removeClient':
-            // Implementar lógica para desfazer a remoção de cliente
-            break;
-        case 'clearOrder':
-            // Implementar lógica para desfazer a limpeza do pedido
-            break;
-    }
+    // Ainda não implementado
 }
